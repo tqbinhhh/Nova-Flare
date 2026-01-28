@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo cáo ngập lụt - NOVA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="./assets/css/report.css">
+    <link rel="stylesheet" href="./assets/css/ui-enhancements.css">
+</head>
+
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 min-h-screen text-slate-200">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute top-1/2 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header-glass fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12">
+        <div class="flex items-center gap-6 lg:gap-12 w-full">
+            <a href="index.html" class="logo-container">
+                <span class="logo-text">NOVA</span>
+                <span class="logo-glow"></span>
+            </a>
+
+            <!-- Mobile menu button (visible on small screens) -->
+            <button class="mobile-menu-btn lg:hidden ml-4 p-2 rounded-md" aria-label="Mở menu">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+            
+            <nav class="hidden lg:flex items-center gap-2 ml-auto">
+                <a href="map.html" class="nav-link">
+                    <i data-lucide="map" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Bản đồ</span>
+                </a>
+                <a href="report.html" class="nav-link active">
+                    <i data-lucide="camera" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Báo ngập</span>
+                </a>
+                <a href="alert.html" class="nav-link">
+                    <i data-lucide="alert-triangle" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Cảnh báo</span>
+                </a>
+                <a href="guide.html" class="nav-link">
+                    <i data-lucide="book-open" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Cẩm nang</span>
+                </a>
+                <a href="dashboard.html" class="nav-link">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <button class="sos-btn ml-4">
+                    <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">SOS</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative w-full pt-32 pb-24 lg:pb-20">
+        <!-- Page Header -->
+        <section class="page-header container mx-auto px-6 mb-12" data-reveal="fade-up">
+            <div class="page-badge inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold mb-4">
+                <span class="badge-dot bg-purple-500"></span>
+                COMMUNITY REPORTING
+            </div>
+            <h1 class="text-4xl lg:text-5xl font-extrabold text-white mb-4">
+                Báo cáo
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">ngập lụt</span>
+            </h1>
+            <p class="text-slate-400 max-w-2xl">
+                Cung cấp hình ảnh và dữ liệu thực tế giúp AI phân tích chính xác và hỗ trợ cộng đồng kịp thời.
+            </p>
+        </section>
+
+        <!-- Report Cards Grid -->
+        <section class="reports-section container mx-auto px-6 mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Quick Report Card -->
+                <div class="report-card" data-reveal="fade-up">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-blue-600/20 text-blue-500 rounded-xl flex items-center justify-center">
+                            <i data-lucide="map-pin" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Báo cáo nhanh</h3>
+                    </div>
+                    <div class="space-y-6">
+                        <button class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition-all flex items-center justify-center shadow-lg shadow-blue-500/20" onclick="getLocation()">
+                            <i data-lucide="navigation" class="w-5 h-5 mr-3"></i> Gửi vị trí hiện tại
+                        </button>
+
+                        <div class="w-full aspect-video bg-slate-900 border-2 border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:border-blue-500/40 transition-all group" id="quick-upload-area" onclick="document.getElementById('media-upload').click()">
+                            <i data-lucide="upload-cloud" class="w-10 h-10 text-slate-600 group-hover:text-blue-500 mb-3 transition-colors"></i>
+                            <p class="text-xs text-slate-500 font-bold uppercase tracking-widest">Tải ảnh/video lên</p>
+                            <input type="file" id="media-upload" accept="image/*,video/*" class="hidden" onchange="handleFileUpload(this)">
+                            <p class="text-xs text-slate-400 mt-3">Ảnh bạn gửi sẽ được sử dụng để AI học các dấu hiệu: nước từ <strong>15 cm</strong> bắt đầu nguy hiểm, <strong>30 cm</strong> có nguy cơ cuốn trôi xe nhỏ, và <strong>trên 30 cm</strong> đến đầu gối là cực kỳ nguy hiểm. Vui lòng không gửi ảnh chứa thông tin nhạy cảm.</p>
+                        </div>
+
+                        <!-- AI Analysis Result for Quick Report -->
+                        <div id="quick-report-ai-result" class="hidden animate-in fade-in slide-in-from-top-2">
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Độ sâu thực tế</label>
+                                <span id="depth-value" class="text-lg font-bold text-blue-400">0.0m</span>
+                            </div>
+                            <input type="range" min="0" max="5" step="0.1" value="0" class="w-full h-1.5 bg-white/5 rounded-full appearance-none cursor-pointer accent-blue-500" id="depth-slider">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Citizen Report Card -->
+                <div class="report-card" data-reveal="fade-up" data-delay="100">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-purple-600/20 text-purple-500 rounded-xl flex items-center justify-center">
+                            <i data-lucide="user-check" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Báo cáo của người dân</h3>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="w-full bg-slate-900 border-2 border-dashed border-white/10 rounded-2xl p-4 flex flex-col gap-3">
+                            <label class="text-xs text-slate-400 font-bold uppercase tracking-widest">Địa điểm</label>
+                            <input id="report-location" type="text" placeholder="Nhập địa chỉ hoặc tên địa điểm (ví dụ: Đà Nẵng, Cầu Rồng)" class="p-3 bg-slate-800 rounded text-slate-200 w-full" />
+                            <div class="flex gap-3">
+                                <button class="py-2 px-3 bg-white/5 text-xs rounded-xl" onclick="fillLocationFromGPS()">Dùng vị trí hiện tại</button>
+                                <button class="py-2 px-3 bg-white/5 text-xs rounded-xl" onclick="document.getElementById('report-location').value=''">Xóa</button>
+                            </div>
+
+                            <label class="text-xs text-slate-400 font-bold uppercase tracking-widest">Mô tả ngắn</label>
+                            <textarea id="report-description" rows="3" placeholder="Mô tả tình trạng (ví dụ: ngập, nước chảy xiết, cây đổ...)" class="p-3 bg-slate-800 rounded text-slate-200 w-full"></textarea>
+
+                        </div>
+
+                        <button class="w-full py-3 bg-white/5 hover:bg-white/10 text-white font-bold rounded-2xl transition-all flex items-center justify-center border border-white/5" onclick="checkLocationImpact()" id="check-btn">
+                            <i data-lucide="search" class="w-5 h-5 mr-3 text-purple-500"></i> Kiểm tra ảnh hưởng
+                        </button>
+
+                        <div id="depth-result" class="p-4 bg-slate-950 rounded-xl border border-white/5 min-h-[60px] flex items-center justify-center">
+                            <p class="text-xs text-slate-600 font-bold uppercase tracking-widest animate-pulse">Chưa có báo cáo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hydro Stations Card -->
+                <div class="report-card" data-reveal="fade-up" data-delay="200" id="hydro-card">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-red-600/10 text-red-400 rounded-xl flex items-center justify-center">
+                            <i data-lucide="download" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Đập & Trạm thủy điện (Đà Nẵng)</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div id="hydro-alert-banner" class="hidden p-3 rounded-lg bg-red-600/10 text-red-300 font-bold text-sm">CẢNH BÁO: Có trạm đang xả lũ!</div>
+
+                        <div class="p-4 bg-slate-900 rounded-2xl border border-white/5">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="text-sm text-slate-400 font-semibold">Thông tin đập và trạm (Đà Nẵng)</div>
+                                <div class="flex items-center gap-2">
+                                    <button class="py-1 px-3 bg-white/5 text-xs rounded" onclick="renderHydroFor('ĐÀ NẴNG')">Làm mới</button>
+                                    <button class="py-1 px-3 bg-white/5 text-xs rounded" onclick="renderHydroFor('ALL')">Toàn quốc</button>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 grid grid-cols-1 gap-2">
+                                <div class="flex items-center gap-2">
+                                    <select id="hydro-commune-filter" class="p-2 bg-slate-800 rounded text-slate-300 text-xs w-full" onchange="onHydroCommuneChange(this)">
+                                        <option value="ALL">Tất cả xã</option>
+                                    </select>
+                                </div>
+
+                                <div id="hydro-summary" class="text-sm text-slate-200 font-bold">Tổng lưu lượng xả (Đà Nẵng): —</div>
+                                <div class="text-xs text-slate-400">Hiển thị số liệu lưu lượng xả tại các trạm theo xã.</div>
+                            </div>
+
+                            <div id="hydro-list" class="max-h-56 overflow-auto"></div>
+                            <div class="mt-3 text-xs text-slate-400">Dữ liệu ví dụ; hãy tích hợp API trạm thủy văn để nhận dữ liệu thực tế.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Reports -->
+        <section class="recent-section container mx-auto px-6">
+            <div class="flex items-center justify-between mb-8" data-reveal="fade-up">
+                <h2 class="text-2xl font-bold text-white">Báo cáo gần đây</h2>
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Live Feed</span>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4">
+                <!-- Report Item 1 -->
+                <div class="glass-panel p-6 flex flex-col md:flex-row items-start md:items-center gap-6 group hover:border-purple-500/30 transition-all rounded-3xl" data-reveal="fade-up">
+                    <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center shrink-0 border border-white/5">
+                        <i data-lucide="map-pin" class="w-6 h-6 text-slate-400"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">Ngập sâu tại cầu Trường Tiền, Huế</h4>
+                        <div class="flex gap-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                            <span class="flex items-center"><i data-lucide="user" class="w-3 h-3 mr-1"></i> AN NAM</span>
+                            <span class="flex items-center"><i data-lucide="clock" class="w-3 h-3 mr-1"></i> 2 GIỜ TRƯỚC</span>
+                            <span class="flex items-center text-red-500"><i data-lucide="droplets" class="w-3 h-3 mr-1"></i> 2.5m</span>
+                        </div>
+                    </div>
+                    <button class="w-10 h-10 rounded-xl bg-white/5 group-hover:bg-purple-500/20 text-slate-600 group-hover:text-purple-400 flex items-center justify-center transition-all">
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <!-- Report Item 2 -->
+                <div class="glass-panel p-6 flex flex-col md:flex-row items-start md:items-center gap-6 group hover:border-blue-500/30 transition-all rounded-3xl" data-reveal="fade-up" data-delay="100">
+                    <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center shrink-0 border border-white/5">
+                        <i data-lucide="camera" class="w-6 h-6 text-slate-400"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">Ảnh ngập úng khu phố Nguyễn Huệ</h4>
+                        <div class="flex gap-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                            <span class="flex items-center"><i data-lucide="user" class="w-3 h-3 mr-1"></i> MINH HOÀNG</span>
+                            <span class="flex items-center"><i data-lucide="clock" class="w-3 h-3 mr-1"></i> 4 GIỜ TRƯỚC</span>
+                            <span class="flex items-center text-orange-400"><i data-lucide="droplets" class="w-3 h-3 mr-1"></i> 1.2m</span>
+                        </div>
+                    </div>
+                    <button class="w-10 h-10 rounded-xl bg-white/5 group-hover:bg-blue-500/20 text-slate-600 group-hover:text-blue-400 flex items-center justify-center transition-all">
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile fixed bottom navigation (icons + labels) -->
+    <nav class="bottom-nav" role="navigation" aria-label="Điều hướng chính">
+        <a href="map.html" class="bottom-nav-item" aria-label="Bản đồ">
+            <i data-lucide="map" class="w-5 h-5"></i>
+            <span class="nav-label">Bản đồ</span>
+        </a>
+        <a href="report.html" class="bottom-nav-item" aria-label="Báo ngập">
+            <i data-lucide="camera" class="w-5 h-5"></i>
+            <span class="nav-label">Báo ngập</span>
+        </a>
+        <a href="alert.html" class="bottom-nav-item" aria-label="Cảnh báo">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+            <span class="nav-label">Cảnh báo</span>
+        </a>
+        <a href="guide.html" class="bottom-nav-item" aria-label="Cẩm nang">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="nav-label">Cẩm nang</span>
+        </a>
+        <button class="bottom-nav-item sos-bottom-btn" aria-label="SOS">
+            <i data-lucide="phone" class="w-5 h-5"></i>
+            <span class="nav-label">SOS</span>
+        </button>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.getAttribute('data-delay') || 0;
+                    setTimeout(() => entry.target.classList.add('active'), delay);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        document.querySelectorAll('[data-reveal]').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            observer.observe(el);
+        });
+        const style = document.createElement('style');
+        style.textContent = `[data-reveal].active { opacity: 1 !important; transform: translateY(0) !important; }`;
+        document.head.appendChild(style);
+    </script>
+
+    <!-- Hydro Details Modal -->
+    <div id="hydro-modal" class="hidden fixed inset-0 z-50 items-center justify-center">
+        <div class="modal-backdrop absolute inset-0 bg-black/70"></div>
+        <div class="modal-content relative bg-slate-900 rounded-2xl p-6 w-[92%] max-w-2xl mx-auto">
+            <button class="absolute top-4 right-4 text-slate-400" onclick="closeHydroModal()"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <h3 id="hydro-modal-title" class="text-lg font-bold text-white mb-2">Chi tiết trạm</h3>
+            <div id="hydro-modal-body" class="text-sm text-slate-400 space-y-3"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection@0.0.7/dist/pose-detection.min.js"></script>
+    <script src="./assets/js/report.js"></script>
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/chatbot.js"></script>
+</body>
+
+</html>

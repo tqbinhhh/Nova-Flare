@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cẩm nang an toàn - NOVA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="./assets/css/guide.css">
+    <link rel="stylesheet" href="./assets/css/ui-enhancements.css">
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 min-h-screen text-slate-200">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-green-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute top-1/2 -left-40 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header-glass fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12">
+        <div class="flex items-center gap-6 lg:gap-12 w-full">
+            <a href="index.html" class="logo-container">
+                <span class="logo-text">NOVA</span>
+                <span class="logo-glow"></span>
+            </a>
+            
+            <!-- Mobile menu button (visible on small screens) -->
+            <button class="mobile-menu-btn lg:hidden ml-4 p-2 rounded-md" aria-label="Mở menu">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+            
+            <nav class="hidden lg:flex items-center gap-2 ml-auto">
+                <a href="map.html" class="nav-link">
+                    <i data-lucide="map" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Bản đồ</span>
+                </a>
+                <a href="report.html" class="nav-link">
+                    <i data-lucide="camera" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Báo ngập</span>
+                </a>
+                <a href="alert.html" class="nav-link">
+                    <i data-lucide="alert-triangle" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Cảnh báo</span>
+                </a>
+                <a href="guide.html" class="nav-link active">
+                    <i data-lucide="book-open" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Cẩm nang</span>
+                </a>
+                <a href="dashboard.html" class="nav-link">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <button class="sos-btn ml-4">
+                    <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">SOS</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative w-full pt-32 pb-24 lg:pb-20">
+        <!-- Page Header -->
+        <section class="page-header container mx-auto px-6 mb-12" data-reveal="fade-up">
+            <div class="page-badge inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-bold mb-4">
+                <span class="badge-dot bg-green-500"></span>
+                KỸ NĂNG SINH TỒN
+            </div>
+            <h1 class="text-4xl lg:text-5xl font-extrabold text-white mb-4">
+                Cẩm nang
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-400">an toàn</span>
+            </h1>
+            <p class="text-slate-400 max-w-2xl mx-auto">
+                Video hướng dẫn và infographic chi tiết giúp bạn chủ động phòng chống đuối nước và lũ lụt.
+            </p>
+        </section>
+
+        <!-- Guide Cards Grid -->
+        <section class="guides-section container mx-auto px-6 mb-16">
+            <div class="guides-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Guide 1: First Aid -->
+                <div class="guide-card group" data-reveal="fade-up">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-red-500/20 text-red-500 rounded-xl flex items-center justify-center">
+                            <i data-lucide="heart-pulse" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Sơ cứu đuối nước</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="w-full aspect-video bg-slate-950 rounded-2xl relative mb-6 border border-white/5 overflow-hidden flex items-center justify-center group-hover:border-red-500/30 transition-all">
+                            <div class="absolute inset-0 bg-slate-900/40 z-10"></div>
+                            <i data-lucide="play-circle" class="w-16 h-16 text-white/20 group-hover:text-red-500 transition-all z-20"></i>
+                            <p class="absolute bottom-4 left-4 text-[10px] text-white/50 font-bold uppercase tracking-widest z-20">Video Hướng dẫn (4:20)</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-white/5 text-slate-400 text-xs flex items-center justify-center shrink-0 font-bold">01</span>
+                                <p class="text-slate-400 text-sm">Kiểm tra an toàn xung quanh và đưa nạn nhân ra khỏi nước.</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-white/5 text-slate-400 text-xs flex items-center justify-center shrink-0 font-bold">02</span>
+                                <p class="text-slate-400 text-sm">Gọi cứu hộ ngay lập tức hoặc nhờ người xung quanh giúp đỡ.</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-white/5 text-slate-400 text-xs flex items-center justify-center shrink-0 font-bold">03</span>
+                                <p class="text-slate-400 text-sm">Thực hiện CPR và ép tim ngoài lồng ngực nếu cần thiết.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guide 2: Rain Season Prep -->
+                <div class="guide-card group" data-reveal="fade-up" data-delay="100">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-blue-500/20 text-blue-500 rounded-xl flex items-center justify-center">
+                            <i data-lucide="cloud-rain" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Chuẩn bị mùa mưa</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="w-full aspect-square bg-slate-950 rounded-2xl relative mb-6 border border-white/5 overflow-hidden flex items-center justify-center">
+                            <i data-lucide="image" class="w-16 h-16 text-white/5 transition-all"></i>
+                            <p class="absolute bottom-4 left-4 text-[10px] text-white/50 font-bold uppercase tracking-widest">Infographic PDF</p>
+                            <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-slate-950 to-transparent">
+                                <button class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all">Xem Infographic</button>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i>
+                                <span class="text-slate-300 text-sm font-medium">Kiểm tra hệ thống thoát nước</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i>
+                                <span class="text-slate-300 text-sm font-medium">Chuẩn bị túi cứu hộ khẩn cấp</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i>
+                                <span class="text-slate-300 text-sm font-medium">Nắm các tuyến đường cao an toàn</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guide 3: Child Safety -->
+                <div class="guide-card group" data-reveal="fade-up" data-delay="200">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-purple-500/20 text-purple-500 rounded-xl flex items-center justify-center">
+                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">An toàn cho trẻ em</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="p-6 bg-purple-500/5 rounded-2xl border border-purple-500/10 mb-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <i data-lucide="lightbulb" class="w-5 h-5 text-yellow-500"></i>
+                                <span class="text-xs font-bold text-white uppercase tracking-wider">Mẹo từ chuyên gia</span>
+                            </div>
+                            <p class="text-slate-400 text-sm italic mb-4">"Việc giáo dục trẻ em về nguy hiểm của nước là bước quan trọng nhất trong phòng chống đuối nước."</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-2 h-2 rounded-full bg-purple-500 mt-2"></div>
+                                <p class="text-slate-400 text-sm">Luôn giám sát trẻ trong tầm mắt khi ở gần nguồn nước.</p>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-2 h-2 rounded-full bg-purple-500 mt-2"></div>
+                                <p class="text-slate-400 text-sm">Trang bị áo phao đúng kích cỡ khi đi bơi hoặc đi tàu thuyền.</p>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-2 h-2 rounded-full bg-purple-500 mt-2"></div>
+                                <p class="text-slate-400 text-sm">Dạy trẻ kỹ năng bơi lội và kỹ năng xử lý khi rơi xuống nước.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Offline Access Section -->
+        <section class="offline-section container mx-auto px-6 mb-16">
+            <div class="section-header text-center mb-12" data-reveal="fade-up">
+                <h2 class="text-3xl font-bold text-white mb-4">Truy cập ngoại tuyến</h2>
+                <div class="w-16 h-1 bg-green-600 mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-400">Các kênh thông tin khẩn cấp khi không có kết nối Internet.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-panel p-8 text-center rounded-3xl" data-reveal="fade-up">
+                    <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="message-square" class="w-8 h-8 text-slate-300"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">SMS Cảnh báo</h3>
+                    <p class="text-slate-400 text-sm">Gửi tin nhắn <span class="text-white font-bold">"FLOOD"</span> đến 1900-xxxx</p>
+                </div>
+                
+                <div class="glass-panel p-8 text-center rounded-3xl" data-reveal="fade-up" data-delay="100">
+                    <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="phone-call" class="w-8 h-8 text-slate-300"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">IVR Tự động</h3>
+                    <p class="text-slate-400 text-sm">Gọi <span class="text-white font-bold">1800-xxxx</span> để nghe hướng dẫn</p>
+                </div>
+                
+                <div class="glass-panel p-8 text-center rounded-3xl" data-reveal="fade-up" data-delay="200">
+                    <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="radio" class="w-8 h-8 text-slate-300"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Radio FM</h3>
+                    <p class="text-slate-400 text-sm">Kênh FM địa phương tần số 90.0 Mhz</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a href="#" class="glass-panel p-6 flex items-center justify-between group hover:border-blue-500/30 transition-all rounded-3xl">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 bg-blue-600/20 text-blue-500 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="download" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white">Tải cẩm nang PDF</h4>
+                        <p class="text-slate-400 text-xs">Lưu về máy để xem bất cứ lúc nào</p>
+                    </div>
+                </div>
+                <i data-lucide="arrow-right" class="w-5 h-5 text-slate-600 group-hover:text-blue-500 group-hover:translate-x-1 transition-all"></i>
+            </a>
+            
+            <a href="#" class="glass-panel p-6 flex items-center justify-between group hover:border-green-500/30 transition-all rounded-3xl">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 bg-green-600/20 text-green-500 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="share-2" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white">Chia sẻ cộng đồng</h4>
+                        <p class="text-slate-400 text-xs">Lan tỏa kỹ năng an toàn cho người thân</p>
+                    </div>
+                </div>
+                <i data-lucide="arrow-right" class="w-5 h-5 text-slate-600 group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i>
+            </a>
+        </section>
+    </main>
+
+    <!-- Mobile fixed bottom navigation (icons + labels) -->
+    <nav class="bottom-nav" role="navigation" aria-label="Điều hướng chính">
+        <a href="map.html" class="bottom-nav-item" aria-label="Bản đồ">
+            <i data-lucide="map" class="w-5 h-5"></i>
+            <span class="nav-label">Bản đồ</span>
+        </a>
+        <a href="report.html" class="bottom-nav-item" aria-label="Báo ngập">
+            <i data-lucide="camera" class="w-5 h-5"></i>
+            <span class="nav-label">Báo ngập</span>
+        </a>
+        <a href="alert.html" class="bottom-nav-item" aria-label="Cảnh báo">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+            <span class="nav-label">Cảnh báo</span>
+        </a>
+        <a href="guide.html" class="bottom-nav-item" aria-label="Cẩm nang">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="nav-label">Cẩm nang</span>
+        </a>
+        <button class="bottom-nav-item sos-bottom-btn" aria-label="SOS">
+            <i data-lucide="phone" class="w-5 h-5"></i>
+            <span class="nav-label">SOS</span>
+        </button>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.getAttribute('data-delay') || 0;
+                    setTimeout(() => entry.target.classList.add('active'), delay);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('[data-reveal]').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            observer.observe(el);
+        });
+        const style = document.createElement('style');
+        style.textContent = `[data-reveal].active { opacity: 1 !important; transform: translateY(0) !important; }`;
+        document.head.appendChild(style);
+    </script>
+    <script src="./assets/js/guide.js"></script>
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/chatbot.js"></script>
+</body>
+</html>

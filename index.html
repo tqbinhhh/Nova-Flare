@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA - Hệ thống cảnh báo ngập lụt thông minh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/ui-enhancements.css">
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 min-h-screen text-slate-200">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute top-1/2 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div class="absolute bottom-0 right-1/4 w-60 h-60 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header-glass fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12">
+        <div class="flex items-center gap-6 lg:gap-12 w-full">
+            <a href="index.html" class="logo-container">
+                <span class="logo-text">NOVA</span>
+                <span class="logo-glow"></span>
+            </a>
+
+            <!-- Mobile menu button (visible on small screens) -->
+            <button class="mobile-menu-btn lg:hidden ml-4 p-2 rounded-md" aria-label="Mở menu">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+            
+            <nav class="hidden lg:flex items-center gap-2 ml-auto">
+                <a href="map.html" class="nav-link">
+                    <i data-lucide="map" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Bản đồ</span>
+                </a>
+                <a href="report.html" class="nav-link">
+                    <i data-lucide="camera" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Báo ngập</span>
+                </a>
+                <a href="alert.html" class="nav-link">
+                    <i data-lucide="alert-triangle" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Cảnh báo</span>
+                </a>
+                <a href="guide.html" class="nav-link">
+                    <i data-lucide="book-open" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Cẩm nang</span>
+                </a>
+                <a href="dashboard.html" class="nav-link">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <button class="sos-btn ml-4">
+                    <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">SOS</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative w-full pt-32 pb-24 lg:pb-20">
+        <!-- Hero Section -->
+        <section class="hero-section" data-reveal="fade-up">
+            <div class="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-8">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                Hệ thống AI cảnh báo ngập lụt hàng đầu Việt Nam
+            </div>
+            
+            <h1 class="hero-title text-5xl lg:text-7xl font-extrabold tracking-tight mb-8">
+                Bảo vệ cộng đồng
+                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-violet-400 to-cyan-400">khỏi thiên tai</span>
+                với công nghệ AI
+            </h1>
+            
+            <p class="hero-subtitle text-lg lg:text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+                NOVA sử dụng trí tuệ nhân tạo tiên tiến để dự báo, 
+                cảnh báo và hỗ trợ ứng phó với lũ lụt một cách nhanh chóng và hiệu quả.
+            </p>
+            
+            <div class="hero-cta flex flex-wrap justify-center gap-4 mb-20">
+                <a href="map.html" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold flex items-center transition-all hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20">
+                    <i data-lucide="map" class="w-5 h-5 mr-2"></i>
+                    Bản đồ ngập lụt
+                </a>
+                <a href="alert.html" class="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl font-bold border border-white/5 flex items-center transition-all hover:scale-105">
+                    <i data-lucide="bell" class="w-5 h-5 mr-2"></i>
+                    Nhận cảnh báo
+                </a>
+            </div>
+            
+            <!-- Stats -->
+            <div class="hero-stats flex justify-center items-center gap-4 lg:gap-16 py-8 border-y border-white/5">
+                <div class="stat-item text-center">
+                    <div class="text-3xl font-bold text-white mb-1">247K+</div>
+                    <div class="text-slate-500 text-xs uppercase tracking-widest font-semibold">Người dùng</div>
+                </div>
+                <div class="h-10 w-px bg-white/10 hidden sm:block"></div>
+                <div class="stat-item text-center">
+                    <div class="text-3xl font-bold text-white mb-1">98%</div>
+                    <div class="text-slate-500 text-xs uppercase tracking-widest font-semibold">Độ chính xác</div>
+                </div>
+                <div class="h-10 w-px bg-white/10 hidden sm:block"></div>
+                <div class="stat-item text-center">
+                    <div class="text-3xl font-bold text-white mb-1">24/7</div>
+                    <div class="text-slate-500 text-xs uppercase tracking-widest font-semibold">Giám sát</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="features-section container mx-auto px-6 py-24">
+            <div class="features-header text-center mb-16" data-reveal="fade-up">
+                <h2 class="text-3xl lg:text-5xl font-bold text-white mb-4">Tính năng thông minh</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-400">Khám phá sức mạnh của AI trong việc phòng chống thiên tai</p>
+            </div>
+            
+            <div class="features-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <a href="map.html" class="feature-card group" data-reveal="fade-up">
+                    <div class="card-icon-wrapper group-hover:bg-blue-600/20 transition-colors">
+                        <i data-lucide="map" class="w-6 h-6 text-blue-500 group-hover:text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Bản đồ tương tác</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Theo dõi mực nước và vùng nguy hiểm thời gian thực với bản đồ nhiệt chuẩn xác.</p>
+                    <div class="flex items-center text-blue-500 font-bold text-sm">
+                        Khám phá ngay <i data-lucide="chevron-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+                
+                <!-- Feature 2 -->
+                <a href="report.html" class="feature-card group" data-reveal="fade-up" data-delay="100">
+                    <div class="card-icon-wrapper group-hover:bg-violet-600/20 transition-colors">
+                        <i data-lucide="brain-circuit" class="w-6 h-6 text-violet-500 group-hover:text-violet-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-violet-400 transition-colors">AI Depth Estimator</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Sử dụng AI để phân tích độ sâu nước chỉ từ một bức ảnh chụp, giúp bạn đưa ra quyết định an toàn.</p>
+                    <div class="flex items-center text-violet-500 font-bold text-sm">
+                        Sử dụng ngay <i data-lucide="chevron-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+                
+                <!-- Feature 3 -->
+                <a href="alert.html" class="feature-card group" data-reveal="fade-up" data-delay="200">
+                    <div class="card-icon-wrapper group-hover:bg-red-600/20 transition-colors">
+                        <i data-lucide="alert-triangle" class="w-6 h-6 text-red-500 group-hover:text-red-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-red-400 transition-colors">Cảnh báo tức thì</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Nhận thông báo khẩn cấp về nguy cơ ngập lụt và đuối nước dựa trên vị trí của bạn.</p>
+                    <div class="flex items-center text-red-500 font-bold text-sm">
+                        Xem cảnh báo <i data-lucide="chevron-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+                
+                <!-- Feature 4 -->
+                <a href="#" class="feature-card group" data-reveal="fade-up">
+                    <div class="card-icon-wrapper group-hover:bg-cyan-600/20 transition-colors">
+                        <i data-lucide="bot" class="w-6 h-6 text-cyan-500 group-hover:text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">Chatbot Trợ lý AI</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Trợ lý ảo thông minh sẵn sàng giải đáp mọi thắc mắc và hướng dẫn kỹ năng an toàn 24/7.</p>
+                    <div class="flex items-center text-cyan-500 font-bold text-sm">
+                        Trò chuyện <i data-lucide="chevron-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+                
+                <!-- Feature 5 -->
+                <a href="guide.html" class="feature-card group" data-reveal="fade-up" data-delay="100">
+                    <div class="card-icon-wrapper group-hover:bg-green-600/20 transition-colors">
+                        <i data-lucide="book-open" class="w-6 h-6 text-green-500 group-hover:text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors">Cẩm nang an toàn</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Kho nội dung số về kỹ năng sinh tồn, hướng dẫn sơ cứu và phòng chống thiên tai.</p>
+                    <div class="flex items-center text-green-500 font-bold text-sm">
+                        Vào cẩm nang <i data-lucide="chevron-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+                
+                <!-- Feature 6 -->
+                <a href="dashboard.html" class="feature-card group" data-reveal="fade-up" data-delay="200">
+                    <div class="card-icon-wrapper group-hover:bg-orange-600/20 transition-colors">
+                        <i data-lucide="bar-chart-3" class="w-6 h-6 text-orange-500 group-hover:text-orange-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors">Dữ liệu phân tích</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Dashboard trực quan giúp chính quyền và các tổ chức theo dõi sát xao tình hình cứu trợ.</p>
+                    <div class="flex items-center text-orange-500 font-bold text-sm">
+                        Xem dữ liệu <i data-lucide="chevron-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-it-works py-24 bg-slate-900/50">
+            <div class="container mx-auto px-6">
+                <div class="section-header text-center mb-20" data-reveal="fade-up">
+                    <h2 class="text-4xl font-bold text-white mb-4">Cách NOVA bảo vệ bạn</h2>
+                    <p class="text-slate-400">Quy trình phân tích và ứng phó khẩn cấp tự động</p>
+                </div>
+                
+                <div class="steps-container grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+                    <!-- Step 1 -->
+                    <div class="step-item text-center relative z-10" data-reveal="fade-up">
+                        <div class="w-20 h-20 bg-blue-600/20 text-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-blue-500/20 shadow-lg shadow-blue-500/10">
+                            <i data-lucide="satellite" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4">01. Thu thập</h3>
+                        <p class="text-slate-400 text-sm">Hệ thống quét dữ liệu từ vệ tinh, camera giao thông và cảm biến mực nước trên toàn quốc.</p>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="step-item text-center relative z-10" data-reveal="fade-up" data-delay="100">
+                        <div class="w-20 h-20 bg-violet-600/20 text-violet-500 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-violet-500/20 shadow-lg shadow-violet-500/10">
+                            <i data-lucide="brain" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4">02. Phân tích AI</h3>
+                        <p class="text-slate-400 text-sm">Trí tuệ nhân tạo xử lý hàng triệu điểm dữ liệu để dự báo nguy cơ ngập lụt chính xác đến 98%.</p>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="step-item text-center relative z-10" data-reveal="fade-up" data-delay="200">
+                        <div class="w-20 h-20 bg-cyan-600/20 text-cyan-500 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-cyan-500/20 shadow-lg shadow-cyan-500/10">
+                            <i data-lucide="zap" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4">03. Cảnh báo</h3>
+                        <p class="text-slate-400 text-sm">Thông báo khẩn cấp được gửi trực tiếp đến điện thoại người dân trong khu vực nguy hiểm.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile fixed bottom navigation (icons + labels) -->
+    <nav class="bottom-nav" role="navigation" aria-label="Điều hướng chính">
+        <a href="map.html" class="bottom-nav-item" aria-label="Bản đồ">
+            <i data-lucide="map" class="w-5 h-5"></i>
+            <span class="nav-label">Bản đồ</span>
+        </a>
+        <a href="report.html" class="bottom-nav-item" aria-label="Báo ngập">
+            <i data-lucide="camera" class="w-5 h-5"></i>
+            <span class="nav-label">Báo ngập</span>
+        </a>
+        <a href="alert.html" class="bottom-nav-item" aria-label="Cảnh báo">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+            <span class="nav-label">Cảnh báo</span>
+        </a>
+        <a href="guide.html" class="bottom-nav-item" aria-label="Cẩm nang">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="nav-label">Cẩm nang</span>
+        </a>
+        <button class="bottom-nav-item sos-bottom-btn" aria-label="SOS">
+            <i data-lucide="phone" class="w-5 h-5"></i>
+            <span class="nav-label">SOS</span>
+        </button>
+    </nav>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Simple scroll reveal implementation
+        const reveals = document.querySelectorAll('[data-reveal]');
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.getAttribute('data-delay') || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('active');
+                    }, delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        reveals.forEach(reveal => {
+            reveal.style.opacity = '0';
+            reveal.style.transform = 'translateY(30px)';
+            reveal.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            observer.observe(reveal);
+        });
+
+        // Add active class style dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            [data-reveal].active {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/chatbot.js"></script>
+</body>
+</html>
