@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bản đồ ngập lụt - NOVA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <link rel="stylesheet" href="./assets/css/map.css">
+    <link rel="stylesheet" href="./assets/css/ui-enhancements.css">
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 min-h-screen text-slate-200">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute top-1/2 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header-glass fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12">
+        <div class="flex items-center gap-6 lg:gap-12 w-full">
+            <a href="index.html" class="logo-container">
+                <span class="logo-text">NOVA</span>
+                <span class="logo-glow"></span>
+            </a>
+            
+            <!-- Mobile menu button (visible on small screens) -->
+            <button class="mobile-menu-btn lg:hidden ml-4 p-2 rounded-md" aria-label="Mở menu">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+            
+            <nav class="hidden lg:flex items-center gap-2 ml-auto">
+                <a href="map.html" class="nav-link active">
+                    <i data-lucide="map" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Bản đồ</span>
+                </a>
+                <a href="report.html" class="nav-link">
+                    <i data-lucide="camera" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Báo ngập</span>
+                </a>
+                <a href="alert.html" class="nav-link">
+                    <i data-lucide="alert-triangle" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Cảnh báo</span>
+                </a>
+                <a href="guide.html" class="nav-link">
+                    <i data-lucide="book-open" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Cẩm nang</span>
+                </a>
+                <a href="dashboard.html" class="nav-link">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <button class="sos-btn ml-4">
+                    <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">SOS</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative w-full pt-32 pb-0">
+        <!-- Page Header (Simplified for Map) -->
+        <section class="container mx-auto px-6 mb-6" data-reveal="fade-up">
+            <div class="flex items-end justify-between">
+                <div>
+                    <h1 class="text-3xl font-extrabold text-white mb-2">Bản đồ <span class="text-blue-500">ngập lụt</span></h1>
+                    <p class="text-slate-400 text-sm">Theo dõi trực tiếp tình trạng ngập lụt với công nghệ Heatmap.</p>
+                </div>
+                <div class="hidden md:flex gap-4">
+                    <div class="px-3 py-1 bg-white/5 rounded-full border border-white/5 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Live Updates</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Container -->
+        <div class="map-container">
+            <div id="map"></div>
+
+            <!-- Legend -->
+            <div id="map-legend" class="map-legend" aria-hidden="false">
+                <div class="legend-title">Chú giải</div>
+                <div class="legend-item"><span class="legend-dot red"></span> Nước lớn</div>
+                <div class="legend-item"><span class="legend-dot orange"></span> Nước vừa</div>
+                <div class="legend-item"><span class="legend-dot green"></span> Nước thấp</div>
+            </div>
+            
+            <!-- Alert Panel -->
+            <aside class="alert-panel">
+                <div class="panel-header">
+                    <h3 class="panel-title">
+                        <i data-lucide="alert-triangle" class="w-5 h-5 text-red-500"></i>
+                        Cảnh báo khẩn cấp
+                    </h3>
+                    <button class="panel-close" onclick="closePanel(this)">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div> 
+                
+                <div class="alert-item danger">
+                    <div class="alert-icon">
+                        <i data-lucide="alert-circle" class="w-5 h-5"></i>
+                    </div>
+                    <div class="alert-content">
+                        <p class="alert-title">Nguy hiểm cao</p>
+                        <p class="alert-desc">Mực nước sông Hương dâng cao. Tránh khu vực cầu Trường Tiền.</p>
+                        <span class="alert-time">10 phút trước</span>
+                    </div>
+                </div>
+
+                <div class="alert-item warning">
+                    <div class="alert-icon">
+                        <i data-lucide="eye" class="w-5 h-5"></i>
+                    </div>
+                    <div class="alert-content">
+                        <p class="alert-title">Cảnh báo</p>
+                        <p class="alert-desc">Dự báo mưa lớn tại Phú Yên trong 2 giờ tới.</p>
+                        <span class="alert-time">30 phút trước</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <i data-lucide="map-pin" class="w-5 h-5 text-blue-500"></i>
+                <span class="stat-value">12</span>
+                <span class="stat-label">Vùng ngập</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <i data-lucide="droplets" class="w-5 h-5 text-cyan-500"></i>
+                <span class="stat-value">2.4m</span>
+                <span class="stat-label">Mực nước cao nhất</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <i data-lucide="users" class="w-5 h-5 text-green-500"></i>
+                <span class="stat-value">847</span>
+                <span class="stat-label">Người ảnh hưởng</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <i data-lucide="clock" class="w-5 h-5 text-orange-500"></i>
+                <span class="stat-value">24/7</span>
+                <span class="stat-label">Giám sát</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile fixed bottom navigation (icons + labels) -->
+    <nav class="bottom-nav" role="navigation" aria-label="Điều hướng chính">
+        <a href="map.html" class="bottom-nav-item" aria-label="Bản đồ">
+            <i data-lucide="map" class="w-5 h-5"></i>
+            <span class="nav-label">Bản đồ</span>
+        </a>
+        <a href="report.html" class="bottom-nav-item" aria-label="Báo ngập">
+            <i data-lucide="camera" class="w-5 h-5"></i>
+            <span class="nav-label">Báo ngập</span>
+        </a>
+        <a href="alert.html" class="bottom-nav-item" aria-label="Cảnh báo">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+            <span class="nav-label">Cảnh báo</span>
+        </a>
+        <a href="guide.html" class="bottom-nav-item" aria-label="Cẩm nang">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="nav-label">Cẩm nang</span>
+        </a>
+        <button class="bottom-nav-item sos-bottom-btn" aria-label="SOS">
+            <i data-lucide="phone" class="w-5 h-5"></i>
+            <span class="nav-label">SOS</span>
+        </button>
+    </nav>
+
+    <script type="module" src="./assets/js/map.js"></script>
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/chatbot.js"></script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cảnh báo đuối nước - NOVA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="./assets/css/alert.css">
+    <link rel="stylesheet" href="./assets/css/ui-enhancements.css">
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 min-h-screen text-slate-200">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-red-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute top-1/2 -left-40 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header-glass fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12">
+        <div class="flex items-center gap-6 lg:gap-12 w-full">
+            <a href="index.html" class="logo-container">
+                <span class="logo-text">NOVA</span>
+                <span class="logo-glow"></span>
+            </a>
+            
+            <!-- Mobile menu button (visible on small screens) -->
+            <button class="mobile-menu-btn lg:hidden ml-4 p-2 rounded-md" aria-label="Mở menu">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+            
+            <nav class="hidden lg:flex items-center gap-2 ml-auto">
+                <a href="map.html" class="nav-link">
+                    <i data-lucide="map" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Bản đồ</span>
+                </a>
+                <a href="report.html" class="nav-link">
+                    <i data-lucide="camera" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Báo ngập</span>
+                </a>
+                <a href="alert.html" class="nav-link active">
+                    <i data-lucide="alert-triangle" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Cảnh báo</span>
+                </a>
+                <a href="guide.html" class="nav-link">
+                    <i data-lucide="book-open" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Cẩm nang</span>
+                </a>
+                <a href="dashboard.html" class="nav-link">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <button class="sos-btn ml-4">
+                    <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">SOS</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative w-full pt-32 pb-24 lg:pb-20">
+        <!-- Page Header -->
+        <section class="page-header container mx-auto px-6 mb-12" data-reveal="fade-up">
+            <div class="page-badge danger inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-bold mb-4">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                </span>
+                LIVE ALERT SYSTEM
+            </div>
+            <h1 class="text-4xl lg:text-5xl font-extrabold text-white mb-4">
+                Cảnh báo
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">nguy hiểm</span>
+            </h1>
+            <p class="text-slate-400 max-w-2xl">
+                Hệ thống AI giám sát và phát hiện sớm các nguy cơ đuối nước và ngập lụt. <strong>Trang này tập trung hiển thị cảnh báo cho TP. Đà Nẵng</strong> để hỗ trợ phản ứng nhanh tại địa phương.
+            </p>
+            <div class="mt-4 flex items-center justify-center gap-3">
+                <label class="text-slate-400 text-xs font-bold uppercase tracking-widest">Chọn khu vực:</label>
+                <select id="city-filter" class="p-2 bg-slate-800 text-slate-200 rounded">
+                    <option value="ĐÀ NẴNG" selected>Đà Nẵng</option>
+                    <option value="KHÁNH HÒA">Khánh Hòa</option>
+                    <option value="MIỀN TRUNG">Miền Trung</option>
+                    <option value="ALL">Toàn quốc</option>
+                </select>
+            </div>
+            <div id="city-banner" class="mt-3 text-sm font-bold text-center text-red-400">Hiển thị cảnh báo cho TP. Đà Nẵng</div>
+        </section>
+
+        <!-- Alert Cards Grid -->
+        <section class="alerts-section container mx-auto px-6 mb-16">
+            <div class="alerts-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- High Risk Alert -->
+                <div class="alert-card group border-red-500/20 hover:border-red-500/40" data-region="ĐÀ NẴNG" data-reveal="fade-up">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-12 h-12 bg-red-500/20 text-red-500 rounded-xl flex items-center justify-center">
+                            <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+                        </div>
+                        <span class="status-badge danger">Rất nguy hiểm</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors">Bờ biển Mỹ Khê, Đà Nẵng</h3>
+                        <p class="text-slate-400 text-sm mb-6 leading-relaxed">Ghi nhận sóng lớn và dòng chảy mạnh tại khu vực bãi tắm Mỹ Khê. Tuyệt đối tránh tắm và tiếp cận bờ biển.</p>
+                        <div class="flex items-center gap-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-6">
+                            <span class="flex items-center"><i data-lucide="map-pin" class="w-3 h-3 mr-1"></i> ĐÀ NẴNG</span>
+                            <span class="flex items-center"><i data-lucide="clock" class="w-3 h-3 mr-1"></i> VỪA XONG</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <button class="flex-1 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition-all border border-white/5">Xem chi tiết</button>
+                        <button class="px-4 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition-all shadow-lg shadow-red-500/20"><i data-lucide="phone" class="w-4 h-4"></i></button>
+                    </div>
+                </div> 
+
+                <!-- Medium Risk Alert -->
+                <div class="alert-card group border-orange-500/20 hover:border-orange-500/40" data-region="ĐÀ NẴNG" data-reveal="fade-up" data-delay="100">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-12 h-12 bg-orange-500/20 text-orange-500 rounded-xl flex items-center justify-center">
+                            <i data-lucide="alert-circle" class="w-6 h-6"></i>
+                        </div>
+                        <span class="status-badge warning">Cần chú ý</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-orange-400 transition-colors">Cầu vượt QL1A</h3>
+                        <p class="text-slate-400 text-sm mb-6 leading-relaxed">Mực nước đang dâng cao. Khuyến cáo phương tiện gầm thấp không di chuyển qua khu vực này.</p>
+                        <div class="flex items-center gap-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-6">
+                            <span class="flex items-center"><i data-lucide="map-pin" class="w-3 h-3 mr-1"></i> ĐÀ NẴNG</span>
+                            <span class="flex items-center"><i data-lucide="clock" class="w-3 h-3 mr-1"></i> 30 PHÚT TRƯỚC</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <button class="flex-1 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition-all border border-white/5">Xem chi tiết</button>
+                    </div>
+                </div>
+
+                <!-- Info Alert -->
+                <div class="alert-card group border-blue-500/20 hover:border-blue-500/40" data-region="ĐÀ NẴNG" data-reveal="fade-up" data-delay="200">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-12 h-12 bg-blue-500/20 text-blue-500 rounded-xl flex items-center justify-center">
+                            <i data-lucide="info" class="w-6 h-6"></i>
+                        </div>
+                        <span class="status-badge info">Thời tiết</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">Dự báo Đà Nẵng</h3>
+                        <p class="text-slate-400 text-sm mb-6 leading-relaxed">Dự báo mưa vừa đến to trong 24-48 giờ tới tại Đà Nẵng. Các tuyến đường trũng cần sẵn sàng phương án tránh ngập.</p>
+                        <div class="flex items-center gap-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-6">
+                            <span class="flex items-center"><i data-lucide="cloud-rain" class="w-3 h-3 mr-1"></i> ĐÀ NẴNG</span>
+                            <span class="flex items-center"><i data-lucide="clock" class="w-3 h-3 mr-1"></i> 1 GIỜ TRƯỚC</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <button class="flex-1 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition-all border border-white/5">Xem chi tiết</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Monitoring Section -->
+        <section class="monitoring-section container mx-auto px-6 mb-16">
+            <div class="section-header text-center mb-12" data-reveal="fade-up">
+                <h2 class="text-3xl font-bold text-white mb-4">Hệ thống giám sát 24/7</h2>
+                <div class="w-16 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-400">Dữ liệu được cập nhật trực tiếp từ mạng lưới cảm biến toàn quốc.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Monitor 1 -->
+                <div class="monitor-card overflow-hidden" data-reveal="fade-up">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center border border-white/5">
+                            <i data-lucide="camera" class="w-5 h-5 text-slate-300"></i>
+                        </div>
+                        <h3 class="font-bold text-white">Camera AI</h3>
+                    </div>
+                    <div class="w-full aspect-video bg-slate-950 rounded-xl relative mb-6 border border-white/5 flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent"></div>
+                        <div class="text-center z-10">
+                            <i data-lucide="video" class="w-10 h-10 text-slate-700 mb-3 mx-auto"></i>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest animate-pulse">Analyzing frame data...</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                            <span class="text-xs text-slate-400">Đang hoạt động</span>
+                        </div>
+                        <span class="text-xs text-slate-500 font-mono">ID: CAM_4021</span>
+                    </div>
+                </div>
+
+                <!-- Monitor 2 -->
+                <div class="monitor-card overflow-hidden" data-reveal="fade-up" data-delay="100">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center border border-white/5">
+                            <i data-lucide="radar" class="w-5 h-5 text-slate-300"></i>
+                        </div>
+                        <h3 class="font-bold text-white">Radar dòng chảy</h3>
+                    </div>
+                    <div class="w-full aspect-video bg-slate-950 rounded-xl relative mb-6 border border-white/5 flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent"></div>
+                        <div class="text-center z-10">
+                            <i data-lucide="activity" class="w-10 h-10 text-slate-700 mb-3 mx-auto"></i>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest animate-pulse">Scanning surface...</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                            <span class="text-xs text-slate-400">Đang hoạt động</span>
+                        </div>
+                        <span class="text-xs text-slate-500 font-mono">ID: RAD_082</span>
+                    </div>
+                </div>
+
+                <!-- Monitor 3 -->
+                <div class="monitor-card overflow-hidden" data-reveal="fade-up" data-delay="200">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center border border-white/5">
+                            <i data-lucide="sensor" class="w-5 h-5 text-slate-300"></i>
+                        </div>
+                        <h3 class="font-bold text-white">Cảm biến IoT</h3>
+                    </div>
+                    <div class="w-full aspect-video bg-slate-950 rounded-xl relative mb-6 border border-white/5 flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent"></div>
+                        <div class="text-center z-10">
+                            <i data-lucide="wifi" class="w-10 h-10 text-slate-700 mb-3 mx-auto"></i>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest animate-pulse">Syncing sensors...</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                            <span class="text-xs text-slate-400">99.8% Uptime</span>
+                        </div>
+                        <span class="text-xs text-slate-500 font-mono">ID: NET_992x</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Stats -->
+        <section class="quick-stats container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="stat-card flex items-center gap-6" data-reveal="fade-up">
+                <div class="w-12 h-12 bg-red-600/20 text-red-500 rounded-xl flex items-center justify-center shrink-0">
+                    <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-white">03</div>
+                    <div class="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Cảnh báo đỏ</div>
+                </div>
+            </div>
+            <div class="stat-card flex items-center gap-6" data-reveal="fade-up" data-delay="100">
+                <div class="w-12 h-12 bg-green-600/20 text-green-500 rounded-xl flex items-center justify-center shrink-0">
+                    <i data-lucide="check-circle" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-white">1,247</div>
+                    <div class="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Node hoạt động</div>
+                </div>
+            </div>
+            <div class="stat-card flex items-center gap-6" data-reveal="fade-up" data-delay="200">
+                <div class="w-12 h-12 bg-blue-600/20 text-blue-500 rounded-xl flex items-center justify-center shrink-0">
+                    <i data-lucide="eye" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-white">98%</div>
+                    <div class="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Độ tin cậy AI</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile fixed bottom navigation (icons + labels) -->
+    <nav class="bottom-nav" role="navigation" aria-label="Điều hướng chính">
+        <a href="map.html" class="bottom-nav-item" aria-label="Bản đồ">
+            <i data-lucide="map" class="w-5 h-5"></i>
+            <span class="nav-label">Bản đồ</span>
+        </a>
+        <a href="report.html" class="bottom-nav-item" aria-label="Báo ngập">
+            <i data-lucide="camera" class="w-5 h-5"></i>
+            <span class="nav-label">Báo ngập</span>
+        </a>
+        <a href="alert.html" class="bottom-nav-item" aria-label="Cảnh báo">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+            <span class="nav-label">Cảnh báo</span>
+        </a>
+        <a href="guide.html" class="bottom-nav-item" aria-label="Cẩm nang">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="nav-label">Cẩm nang</span>
+        </a>
+        <button class="bottom-nav-item sos-bottom-btn" aria-label="SOS">
+            <i data-lucide="phone" class="w-5 h-5"></i>
+            <span class="nav-label">SOS</span>
+        </button>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.getAttribute('data-delay') || 0;
+                    setTimeout(() => entry.target.classList.add('active'), delay);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('[data-reveal]').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            observer.observe(el);
+        });
+        const style = document.createElement('style');
+        style.textContent = `[data-reveal].active { opacity: 1 !important; transform: translateY(0) !important; }`;
+        document.head.appendChild(style);
+    </script>
+    <script src="./assets/js/alert.js"></script>
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/chatbot.js"></script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard quản lý - NOVA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <link rel="stylesheet" href="./assets/css/dashboard.css">
+    <link rel="stylesheet" href="./assets/css/ui-enhancements.css">
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 min-h-screen text-slate-200">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute top-1/2 -left-40 w-80 h-80 bg-yellow-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header-glass fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12">
+        <div class="flex items-center gap-6 lg:gap-12 w-full">
+            <a href="index.html" class="logo-container">
+                <span class="logo-text">NOVA</span>
+                <span class="logo-glow"></span>
+            </a>
+            
+            <!-- Mobile menu button (visible on small screens) -->
+            <button class="mobile-menu-btn lg:hidden ml-4 p-2 rounded-md" aria-label="Mở menu">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+            
+            <nav class="hidden lg:flex items-center gap-2 ml-auto">
+                <a href="map.html" class="nav-link">
+                    <i data-lucide="map" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Bản đồ</span>
+                </a>
+                <a href="report.html" class="nav-link">
+                    <i data-lucide="camera" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Báo ngập</span>
+                </a>
+                <a href="alert.html" class="nav-link">
+                    <i data-lucide="alert-triangle" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Cảnh báo</span>
+                </a>
+                <a href="guide.html" class="nav-link">
+                    <i data-lucide="book-open" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Cẩm nang</span>
+                </a>
+                <a href="dashboard.html" class="nav-link active">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <button class="sos-btn ml-4">
+                    <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                    <span class="nav-text">SOS</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative w-full pt-32 pb-24 lg:pb-20">
+        <!-- Page Header -->
+        <section class="page-header container mx-auto px-6 mb-12" data-reveal="fade-up">
+            <div class="page-badge inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold mb-4">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+                </span>
+                LIVE COMMAND CENTER
+            </div>
+            <h1 class="text-4xl lg:text-5xl font-extrabold text-white mb-4">
+                Dashboard
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">quản lý</span>
+            </h1>
+            <p class="text-slate-400 max-w-2xl mx-auto">
+                Công cụ giám sát và phân tích dữ liệu toàn diện cho các cơ quan chức năng.
+            </p>
+        </section>
+
+        <!-- Stats Grid -->
+        <section class="stats-section container mx-auto px-6 mb-12">
+            <div class="stats-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Stat 1 -->
+                <div class="stat-card" data-reveal="fade-up">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 bg-blue-600/20 text-blue-500 rounded-xl flex items-center justify-center">
+                            <i data-lucide="map-pin" class="w-6 h-6"></i>
+                        </div>
+                        <div class="stat-trend up flex items-center text-green-400 text-xs font-bold px-2 py-1 rounded-lg bg-green-400/10">
+                            <i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> +12%
+                        </div>
+                    </div>
+                    <div class="stat-info">
+                        <div class="text-3xl font-bold text-white mb-1">1,247</div>
+                        <div class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Báo cáo hôm nay</div>
+                    </div>
+                </div>
+                
+                <!-- Stat 2 -->
+                <div class="stat-card" data-reveal="fade-up" data-delay="100">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 bg-green-600/20 text-green-500 rounded-xl flex items-center justify-center">
+                            <i data-lucide="users" class="w-6 h-6"></i>
+                        </div>
+                        <div class="stat-trend down flex items-center text-red-400 text-xs font-bold px-2 py-1 rounded-lg bg-red-400/10">
+                            <i data-lucide="trending-down" class="w-3 h-3 mr-1"></i> -5%
+                        </div>
+                    </div>
+                    <div class="stat-info">
+                        <div class="text-3xl font-bold text-white mb-1">89</div>
+                        <div class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Cần hỗ trợ</div>
+                    </div>
+                </div>
+                
+                <!-- Stat 3 -->
+                <div class="stat-card" data-reveal="fade-up" data-delay="200">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 bg-cyan-600/20 text-cyan-500 rounded-xl flex items-center justify-center">
+                            <i data-lucide="droplets" class="w-6 h-6"></i>
+                        </div>
+                        <div class="stat-trend neutral flex items-center text-slate-400 text-xs font-bold px-2 py-1 rounded-lg bg-white/5">
+                            <i data-lucide="minus" class="w-3 h-3 mr-1"></i> 0%
+                        </div>
+                    </div>
+                    <div class="stat-info">
+                        <div class="text-3xl font-bold text-white mb-1">2.4m</div>
+                        <div class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Mực nước đỉnh</div>
+                    </div>
+                </div>
+                
+                <!-- Stat 4 -->
+                <div class="stat-card" data-reveal="fade-up" data-delay="300">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 bg-purple-600/20 text-purple-500 rounded-xl flex items-center justify-center">
+                            <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                        </div>
+                        <div class="stat-trend up flex items-center text-green-400 text-xs font-bold px-2 py-1 rounded-lg bg-green-400/10">
+                            <i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> +2%
+                        </div>
+                    </div>
+                    <div class="stat-info">
+                        <div class="text-3xl font-bold text-white mb-1">94%</div>
+                        <div class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Tỉ lệ AI chính xác</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Content -->
+        <section class="dashboard-content container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                <!-- Map Card -->
+                <div class="lg:col-span-2 dashboard-card" data-reveal="fade-up">
+                    <div class="p-6 border-b border-white/5 flex items-center justify-between">
+                        <h3 class="font-bold text-white flex items-center">
+                            <i data-lucide="heat-map" class="w-5 h-5 mr-3 text-orange-500"></i>
+                            Phân tích vùng ngập lụt
+                        </h3>
+                        <div class="flex gap-2">
+                            <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+                            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Live Updates</span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div id="dashboard-map" class="w-full h-[400px] rounded-2xl overflow-hidden grayscale contrast-125 brightness-75"></div>
+                    </div>
+                </div>
+
+                <!-- Sentiment & Export -->
+                <div class="dashboard-card" data-reveal="fade-up" data-delay="100">
+                    <div class="p-6 border-b border-white/5">
+                        <h3 class="font-bold text-white flex items-center">
+                            <i data-lucide="brain" class="w-5 h-5 mr-3 text-purple-500"></i>
+                            Tâm lý cộng đồng
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-6 mb-8">
+                            <div class="sentiment-item">
+                                <div class="flex justify-between text-xs font-bold mb-2">
+                                    <span class="text-green-400 uppercase tracking-wider">Tích cực</span>
+                                    <span class="text-white">65%</span>
+                                </div>
+                                <div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-green-600/50 to-green-400 rounded-full" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <div class="sentiment-item">
+                                <div class="flex justify-between text-xs font-bold mb-2">
+                                    <span class="text-orange-400 uppercase tracking-wider">Trung lập</span>
+                                    <span class="text-white">20%</span>
+                                </div>
+                                <div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-orange-600/50 to-orange-400 rounded-full" style="width: 20%"></div>
+                                </div>
+                            </div>
+                            <div class="sentiment-item">
+                                <div class="flex justify-between text-xs font-bold mb-2">
+                                    <span class="text-red-400 uppercase tracking-wider">Lo ngại</span>
+                                    <span class="text-white">15%</span>
+                                </div>
+                                <div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-red-600/50 to-red-400 rounded-full" style="width: 15%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition-colors flex items-center justify-center border border-white/5">
+                                <i data-lucide="download" class="w-3 h-3 mr-2"></i> CSV
+                            </button>
+                            <button class="px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition-colors flex items-center justify-center border border-white/5">
+                                <i data-lucide="file-json" class="w-3 h-3 mr-2"></i> JSON
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Issues Section -->
+            <div class="section-container" data-reveal="fade-up">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-2xl font-bold text-white">Vấn đề bức xúc</h2>
+                    <button class="text-blue-500 text-sm font-bold hover:underline">Xem tất cả</button>
+                </div>
+                
+                <div class="grid grid-cols-1 gap-4">
+                    <!-- Issue 1 -->
+                    <div class="dashboard-card group hover:border-red-500/30 transition-all p-6 flex flex-col md:flex-row items-start md:items-center gap-6">
+                        <div class="w-1 h-12 bg-red-500 rounded-full"></div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-white mb-1 group-hover:text-red-400 transition-colors">Xả đập không đúng giờ</h4>
+                            <p class="text-slate-400 text-sm mb-3">Người dân phàn nàn về việc xả đập gây ngập úng bất ngờ tại hạ lưu.</p>
+                            <div class="flex gap-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                                <span class="flex items-center"><i data-lucide="message-square" class="w-3 h-3 mr-1"></i> 45 BÁO CÁO</span>
+                                <span class="flex items-center"><i data-lucide="clock" class="w-3 h-3 mr-1"></i> 2 GIỜ TRƯỚC</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="w-10 h-10 rounded-xl bg-white/5 hover:bg-green-500/20 hover:text-green-500 flex items-center justify-center transition-all">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                            </button>
+                            <button class="w-10 h-10 rounded-xl bg-white/5 hover:bg-blue-500/20 hover:text-blue-500 flex items-center justify-center transition-all">
+                                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Issue 2 -->
+                    <div class="dashboard-card group hover:border-orange-500/30 transition-all p-6 flex flex-col md:flex-row items-start md:items-center gap-6">
+                        <div class="w-1 h-12 bg-orange-500 rounded-full"></div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-white mb-1 group-hover:text-orange-400 transition-colors">Tắc nghẽn cống thoát nước</h4>
+                            <p class="text-slate-400 text-sm mb-3">Cống bị tắc do rác thải gây ngập cục bộ ở nhiều khu vực đô thị.</p>
+                            <div class="flex gap-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                                <span class="flex items-center"><i data-lucide="message-square" class="w-3 h-3 mr-1"></i> 32 BÁO CÁO</span>
+                                <span class="flex items-center"><i data-lucide="clock" class="w-3 h-3 mr-1"></i> 5 GIỜ TRƯỚC</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="w-10 h-10 rounded-xl bg-white/5 hover:bg-green-500/20 hover:text-green-500 flex items-center justify-center transition-all">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                            </button>
+                            <button class="w-10 h-10 rounded-xl bg-white/5 hover:bg-blue-500/20 hover:text-blue-500 flex items-center justify-center transition-all">
+                                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile fixed bottom navigation (icons + labels) -->
+    <nav class="bottom-nav" role="navigation" aria-label="Điều hướng chính">
+        <a href="map.html" class="bottom-nav-item" aria-label="Bản đồ">
+            <i data-lucide="map" class="w-5 h-5"></i>
+            <span class="nav-label">Bản đồ</span>
+        </a>
+        <a href="report.html" class="bottom-nav-item" aria-label="Báo ngập">
+            <i data-lucide="camera" class="w-5 h-5"></i>
+            <span class="nav-label">Báo ngập</span>
+        </a>
+        <a href="alert.html" class="bottom-nav-item" aria-label="Cảnh báo">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+            <span class="nav-label">Cảnh báo</span>
+        </a>
+        <a href="guide.html" class="bottom-nav-item" aria-label="Cẩm nang">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="nav-label">Cẩm nang</span>
+        </a>
+        <button class="bottom-nav-item sos-bottom-btn" aria-label="SOS">
+            <i data-lucide="phone" class="w-5 h-5"></i>
+            <span class="nav-label">SOS</span>
+        </button>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+
+        // Simple scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.getAttribute('data-delay') || 0;
+                    setTimeout(() => entry.target.classList.add('active'), delay);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('[data-reveal]').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            observer.observe(el);
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `[data-reveal].active { opacity: 1 !important; transform: translateY(0) !important; }`;
+        document.head.appendChild(style);
+    </script>
+    <script type="module" src="./assets/js/dashboard.js"></script>
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/chatbot.js"></script>
+</body>
+</html>
